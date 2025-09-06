@@ -21,18 +21,17 @@
       "unique": true
     },
     "content": {
-      "type": "blocks",
+      "type": "richtext",
       "required": true
     },
     "excerpt": {
-      "type": "string"
+      "type": "text"
     },
     "featuredImage": {
       "type": "media",
       "multiple": false,
       "allowedTypes": [
-        "images",
-        "files"
+        "images"
       ]
     },
     "gallery": {
@@ -41,6 +40,49 @@
       "allowedTypes": [
         "images"
       ]
+    },
+    "category": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::category.category",
+      "inversedBy": "blog_posts"
+    },
+    "tags": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::tag.tag",
+      "mappedBy": "blog_posts"
+    },
+    "author": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::author.author",
+      "inversedBy": "blog_posts"
+    },
+    "seo": {
+      "type": "component",
+      "component": "shared.seo",
+      "repeatable": false
+    },
+    "featured": {
+      "type": "boolean",
+      "default": false
+    },
+    "status": {
+      "type": "enumeration",
+      "default": "draft",
+      "enum": [
+        "draft",
+        "published",
+        "archived"
+      ]
+    },
+    "readingTime": {
+      "type": "integer",
+      "min": 0,
+      "description": "Estimated reading time in minutes",
+      "configurable": false,
+      "writable": false
     }
   }
 }
